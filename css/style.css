@@ -8,8 +8,14 @@
     bottom: 0; 
     height: 80px; 
     width: 100%; 
-    text-align: center; 
-    background-color: beige;
+    text-align: right; 
+    /* background-color: beige; */
+}
+
+.add-button{
+    border-radius: 50%;
+    height: 130px;
+    width: 130px;
 }
 
 .in_card {

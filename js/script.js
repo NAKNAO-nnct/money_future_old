@@ -1,12 +1,22 @@
-document.getElementById("body").onmouseout = function () {
-    var income = parseInt(document.getElementById("income").innerHTML);
+
+
+document.getElementById("body").onchange = function () {
+    display_money();
+}
+
+document.getElementById("body").onload = function () {
+    display_money();
+}
+
+function display_money() {
+    var balance = parseInt(document.getElementById("balance").innerHTML);
     // var out_money = document.getElementsByClassName("out_money");
     // var in_money = document.getElementsByClassName("in_money");
     var money = document.getElementsByClassName("money");
     var sum = document.getElementsByClassName("sum");
     for (let i = 0; i < document.getElementsByClassName("budget").length; i++) {
-        sum[i].innerHTML = income + parseInt(money[i].innerHTML);
-        income += parseInt(money[i].innerHTML);
+        sum[i].innerHTML = balance + parseInt(money[i].innerHTML);
+        balance += parseInt(money[i].innerHTML);
         // sum[i].parentElement;
     }
 }
