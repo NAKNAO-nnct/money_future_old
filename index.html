@@ -23,13 +23,27 @@
             <div class="card column">
                 <div class="card-content">
 
-                    <div class="media-content">
-                        <p class="title is-4">残金</p>
-                        <p class="subtitle is-6"></p>
-                    </div>
 
-                    <div class="content">
-                        <p><span id="balance">500</span>円</p>
+                    <div class="content" id="balance_area">
+                            <p class="title is-4">残金:
+                                <span id="balance">{{ have.balance }}</span>
+                                円
+                            </p>
+                            
+                            <div class="field">
+                                <label class="label is-medium">残りのお金</label>
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="君の預金" id="balance_money">
+                                    </div>
+                                    <div class="control">
+                                        <a class="button is-info" v-on:click="update()">確定</a>
+                                    </div>
+                                    <div class="control" style="right: -30px;">
+                                        <button class="button" onclick="display_money()">更新</button>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -37,14 +51,14 @@
 
         <hr>
 
-        <div class="columns is-three-quarters is-gapless is-multiline is-mobile">
-            <div class="column">
+        <div class="columns is-gapless is-multiline is-mobile">
+            <div class="column  is-four-fifths">
 
                 <div id="app">
                     <draggable>
                         <div v-for="item, index in items">
                             <div class="columns is-gapless is-multiline is-mobile budget">
-                                <div class="card column is-three-fifths in_card">
+                                <div class="card column is-four-fifths in_card" v-bind:id="item.id">
                                     <header class="card-header">
                                         <label class="card-header-title checkbox">
                                             <input type="checkbox" name="" id="" class="check-botton"
@@ -59,24 +73,17 @@
                                                 <p>
                                                     <span class="subtitle is-4 money">{{ item.money }}</span>円
                                                 </p>
-                                                <!-- <p v-else-if="item.type == 'in'">
-                                            <span class="subtitle is-4 in_money">{{ item.money }}</span>円
-                                        </p> -->
-                                                日付：<time datetime="">2019/05/06</time>
+                                                日付：<time datetime="">{{ item.date }}</time>
                                             </div>
                                         </div>
                                         <footer class="card-footer">
-                                            <!-- <div class="card-footer-item button is-success check-botton"
-                                        onclick="check_button(this)">
-
-                                    </div> -->
-                                            <a href="#" class="card-footer-item button is-danger is-outlined">消す</a>
+                                            <a href="#" class="card-footer-item button is-danger is-outlined" v-on:click="delete_data(item.id)">消す</a>
                                         </footer>
                                     </div>
                                 </div>
 
                                 <div class="card column">
-                                    <div style="margin-bottom: 10px;">
+                                    <div style="position:absolute; right: 5px;bottom: 0px;">
                                         <div class="">
                                             <p>
                                                 <span class="subtitle is-4 sum"></span>円
@@ -90,9 +97,8 @@
                     </draggable>
                 </div>
             </div>
-            <div class="column">
-                bokete
-            </div>
+            
+            <div class="column">Auto</div>
         </div>
 
     </main>

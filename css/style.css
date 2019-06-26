@@ -1,6 +1,5 @@
-.card-display {
-    background-color: aqua;
-    z-index: -1;
+.card-disable {
+    opacity: 0.3;
 }
 
 .add-area{
