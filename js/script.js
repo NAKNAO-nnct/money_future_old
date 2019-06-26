@@ -118,5 +118,9 @@ function delete_data(id) {
     vue_cons[0].update();
 }
 
-// 
+// 強制初期化
+function forcibly_initializing(){
+    localStorage.clear();
+    vue_cons[0].update();
+}
 
