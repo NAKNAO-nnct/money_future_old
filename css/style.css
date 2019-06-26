@@ -1,0 +1,25 @@
+.card-display {
+    background-color: aqua;
+    z-index: -1;
+}
+
+.add-area{
+    position: fixed; 
+    bottom: 0; 
+    height: 80px; 
+    width: 100%; 
+    text-align: center; 
+    background-color: beige;
+}
+
+.in_card {
+    /* background-color: hsl(200, 100%, 83%); */
+}
+
+.in_card .card-content{
+    /* background-color: hsl(200, 100%, 90%); */
+}
+
+main{
+    padding-bottom: 100px;
+}

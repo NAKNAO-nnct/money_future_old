@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bulma.min.css">
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+
+
+    <title>Document</title>
+</head>
+
+<body id="body">
+    <main class="container">
+        <br>
+        <div class="columns">
+            <div class="card column">
+                <div class="card-content">
+
+                    <div class="media-content">
+                        <p class="title is-4">残金</p>
+                        <p class="subtitle is-6"></p>
+                    </div>
+
+                    <div class="content">
+                        <p><span id="balance">500</span>円</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card column">
+                <div class="card-content">
+
+                    <div class="media-content">
+                        <p class="title is-4">収入</p>
+                        <p class="subtitle is-6"></p>
+                    </div>
+                    <div class="content">
+                        <p><span id="income">100</span>円</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div id="app">
+            <draggable>
+                <div v-for="item, index in items">
+                    <div class="columns is-gapless is-multiline is-mobile budget">
+                        <div class="card column is-three-fifths in_card">
+                            <header class="card-header">
+                                <label class="card-header-title checkbox">
+                                    <input type="checkbox" name="" id="" class="check-botton"
+                                        onclick="check_button(this)" checked="checked">
+                                    &emsp;{{ item.name }}
+                                </label>
+                                <p id="sum"></p>
+                            </header>
+                            <div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <p>
+                                            <span class="subtitle is-4 money">{{ item.money }}</span>円
+                                        </p>
+                                        <!-- <p v-else-if="item.type == 'in'">
+                                            <span class="subtitle is-4 in_money">{{ item.money }}</span>円
+                                        </p> -->
+                                        日付：<time datetime="">2019/05/06</time>
+                                    </div>
+                                </div>
+                                <footer class="card-footer">
+                                    <!-- <div class="card-footer-item button is-success check-botton"
+                                        onclick="check_button(this)">
+
+                                    </div> -->
+                                    <a href="#" class="card-footer-item button is-danger is-outlined">消す</a>
+                                </footer>
+                            </div>
+                        </div>
+
+                        <div class="card column">
+                            <div style="margin-bottom: 10px;">
+                                <div class="">
+                                    <p>
+                                        <span class="subtitle is-4 sum"></span>円
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </draggable>
+        </div>
+
+
+    </main>
+
+    <div class="add-area">
+        <a class="button is-primary is-rounded" style="top: 20px;">追加するんやで</a>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
