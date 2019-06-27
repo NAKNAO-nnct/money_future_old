@@ -2,6 +2,10 @@
     opacity: 0.3;
 }
 
+.plans{
+    display: none;
+}
+
 .add-area{
     position: fixed; 
     bottom: 0; 
@@ -13,12 +17,13 @@
 
 .add-button{
     border-radius: 50%;
-    height: 130px;
-    width: 130px;
+    height: 110px;
+    width: 110px;
 }
 
 .in_card {
     /* background-color: hsl(200, 100%, 83%); */
+    /* height: 200px; */
 }
 
 .in_card .card-content{
@@ -27,4 +32,8 @@
 
 main{
     padding-bottom: 100px;
+}
+.my-handle {
+  cursor: move;
+  /* cursor: -webkit-grabbing; */
 }

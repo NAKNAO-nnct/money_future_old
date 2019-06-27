@@ -23,12 +23,39 @@ var user_data = {
     }
 };
 
-window.onchange = function(){
+window.onchange = function () {
     display_money();
+    // setTimeout(get_card_order(), 5000);
+    get_card_order();
 }
 
-                
+// window.onmousemove = function () {
+//     console.warn("==========================");
+//     for (let i = 0; i < 4; i++) {
+//         // user_data.items[i] = _user_data.items[cards[i].value];
+//         console.log(user_data.items[i].name);
+//     }
+// }
 
+// カード並び順を取得
+function get_card_order() {
+    var cards = document.getElementsByClassName("plans");
+    var _user_data = {};
+    Object.assign(_user_data, user_data);
+    console.log(user_data);
+
+    // for (let i = 0; i < cards.length; i++) {
+    //     user_data.items[i] = Object.create(_user_data.items[cards[i].value - 1]);
+    // }
+    for (let i = 0; i < cards.length; i++) {
+        console.log(user_data.items[i].name);
+    }
+
+    // insert_db();
+
+}
+
+// 予算表示
 function display_money() {
     var balance = parseInt(document.getElementById("balance").innerHTML);
     // var out_money = document.getElementsByClassName("out_money");
@@ -45,7 +72,7 @@ function display_money() {
 // 反映
 function check_button(button) {
     console.log(button.parentNode.parentNode.parentNode.parentNode.style[0] == "opacity");
-    
+
     button.parentNode.parentNode.parentNode.classList.toggle("card-disable");
 }
 // var check_button = document.getElementsByClassName("check-botton");
@@ -57,11 +84,11 @@ function check_button(button) {
 
 // Web storage
 // init
-(function init_db(){
+(function init_db() {
     // localstorageにデータがなければデータを挿入
-    if(localStorage[database_key] != undefined){
+    if (localStorage[database_key] != undefined) {
         user_data = JSON.parse(localStorage[database_key]);
-    }else{
+    } else {
         localStorage[database_key] = JSON.stringify(user_data);
     }
     console.log(user_data);
@@ -70,13 +97,12 @@ function check_button(button) {
         el: "#app",
         data: user_data,
         methods: {
-            update: function(){
+            update: function () {
                 this.$forceUpdate();
                 display_money();
             }
-        },
+        }
     });
-
 
     vue_cons[1] = new Vue({
         el: '#balance_area',
@@ -84,7 +110,7 @@ function check_button(button) {
         methods: {
             update: function () {
                 const balance = parseInt(document.getElementById("balance_money").value);
-                if(!isNaN(balance)){
+                if (!isNaN(balance)) {
                     user_data["have"].balance = balance;
                     this.$forceUpdate();
                     display_money();
@@ -93,34 +119,50 @@ function check_button(button) {
         }
     })
     display_money();
+
+    Sortable.create(app, {
+        handle: '.my-handle',
+        animation: 150
+    });
+
 }());
 
 // insert
-function insert_db(insert_data){}
+function insert_db() {
+    localStorage[database_key] = JSON.stringify(user_data);
+}
 
 // get
-function get_data(){
+function get_data() {
     console.log(localStorage[database_key]);
 };
 
 // delete
 function delete_data(id) {
     var n;
-    for(let i=0; i<user_data["items"].length; i++){
-        if(user_data["items"][i]["id"] == id){
+    for (let i = 0; i < user_data["items"].length; i++) {
+        if (user_data["items"][i]["id"] == id) {
             delete user_data["items"][i];
             n = i;
         }
     }
-    
+
     user_data["items"] = user_data["items"].filter(n => n !== 1);
     console.log(user_data["items"]);
     vue_cons[0].update();
 }
 
 // 強制初期化
-function forcibly_initializing(){
+function forcibly_initializing() {
     localStorage.clear();
     vue_cons[0].update();
 }
 
+
+
+// var btn = document.getElementsByClassName("button");
+// for (let i = 0; i < btn.length; i++) {
+//     btn[i].onclick = function () {
+//         alert("fff");
+//     }
+// }
