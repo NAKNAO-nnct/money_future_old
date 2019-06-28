@@ -135,7 +135,7 @@ function check_button(button) {
 
     Sortable.create(app, {
         handle: '.my-handle',
-        animation: 1000
+        animation: 600
     });
 
 }());
@@ -177,6 +177,9 @@ function forcibly_initializing() {
 function modal_open(modal_name){
     document.getElementById(modal_name).classList.toggle("is-active");
 }
+
+// 予算の追加
+function add_plans(){}
 
 
 
