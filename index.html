@@ -46,7 +46,7 @@
                                     <button class="button" onclick="display_money()">更新</button>
                                 </div>
                                 <div class="control" style="right: -30px;">
-                                    <button class="button" onclick="forcibly_initializing()">初期化</button>
+                                    <button class="button is-danger" onclick="forcibly_initializing()">初期化</button>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                             <div class="field">
                                 <label class="label">Title</label>
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="自分生誕祭 ケーキ代">
+                                    <input class="input" type="text" placeholder="自分生誕祭 ケーキ代" required>
                                 </div>
                             </div>
                             <div class="field">
@@ -87,12 +87,12 @@
                                     </p>
                                     <p class="control" style="width: 100%;">
                                         <input class="input" type="number" min="0" placeholder="3500"
-                                            id="input_plan_balance">
+                                            id="input_plan_balance" required>
                                     </p>
-                                    <div class="select" id="input_plan_balance_out">
-                                        <select>
-                                            <option value="in">収入</option>
-                                            <option value="out" selected>支出</option>
+                                    <div class="select is-danger" id="input_plan_balance_out">
+                                        <select required  style="color: red;">
+                                            <option value="in" style="color: black">収入</option>
+                                            <option value="out" selected  style="color: black">支出</option>
                                         </select>
                                     </div>
                                 </div>
@@ -119,8 +119,11 @@
                     </footer>
                 </div>
             </div>
-
         </div>
+
+
+
+        <!--  -->
         <div class="columns is-gapless is-multiline is-mobile">
             <!-- 
             <div class="column">
@@ -156,8 +159,25 @@
                                         </div>
                                     </div>
                                     <footer class="card-footer" slot="footer">
+                                        <!-- 確認画面 -->
+                                        <div class="modal" id="warning-modal">
+                                            <div class="modal-background"></div>
+                                            <div class="modal-content">
+                                                <div class="card">
+                                                    <div class="card-content" style="text-align: center;">
+                                                        <p class="title is-4">
+                                                            魔剤！？
+                                                        </p>
+                                                    </div>
+                                                    <footer class="card-footer">
+                                                        <a href="#" class="card-footer-item" v-on:click="delete_data(item.id)">大丈夫やで</a>
+                                                        <a href="#" class="card-footer-item" onclick="modal_open('warning-modal')" style="color: var(--black-bis)">あかんあかん</a>
+                                                    </footer>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <a href="#" class="card-footer-item button is-danger is-outlined"
-                                            v-on:click="delete_data(item.id)">消す</a>
+                                            onclick="modal_open('warning-modal')">消す</a>
                                     </footer>
                                 </div>
                             </div>

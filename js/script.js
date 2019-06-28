@@ -153,6 +153,7 @@ function get_data() {
 
 // delete
 function delete_data(id) {
+    modal_open('warning-modal');
     var n;
     for (let i = 0; i < user_data["items"].length; i++) {
         if (user_data["items"][i]["id"] == id) {
