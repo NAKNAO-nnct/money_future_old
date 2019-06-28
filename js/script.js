@@ -26,10 +26,6 @@ var user_data = {
     }
 };
 
-function _on(el, event, fn) {
-    el.addEventListener(event, fn, { capture: false, passive: false });
-}
-
 // 画面に変更が加わるごとに表示金額計算と並び順を保存
 window.onchange = function () { reload(); }
 
@@ -40,7 +36,7 @@ function reload() {
     get_card_order();
 
 
-    // vue_cons[0].update();
+    vue_cons[0].update();
 }
 
 // window.onmousemove = function () {
@@ -56,6 +52,8 @@ function get_card_order() {
     var cards = document.getElementsByClassName("plans");
     var tmp_user_data = new Array();
 
+    var user_data = JSON.parse(localStorage[database_key]);
+
     for (let i = 0; i < cards.length; i++) {
         tmp_user_data[i] = new Object();
         user_data.items.forEach(function (item) {
@@ -65,10 +63,11 @@ function get_card_order() {
         })
     }
     user_data.items = new Array();
-    user_data.items = tmp_user_data;
+    console.log(tmp_user_data);
+    user_data.items = tmp_user_data.slice();
+    console.log(user_data);
 
-    // insert_db();
-
+    insert_db();
 }
 
 // 予算表示
