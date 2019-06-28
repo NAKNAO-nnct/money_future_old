@@ -90,9 +90,9 @@
                                             id="input_plan_balance" required>
                                     </p>
                                     <div class="select is-danger" id="input_plan_balance_out">
-                                        <select required  style="color: red;">
+                                        <select required style="color: red;">
                                             <option value="in" style="color: black">収入</option>
-                                            <option value="out" selected  style="color: black">支出</option>
+                                            <option value="out" selected style="color: black">支出</option>
                                         </select>
                                     </div>
                                 </div>
@@ -137,6 +137,24 @@
 
                     </div>
                     <div v-for="item, index in items" draggable="false" class="" style="">
+                        <!-- 確認画面 -->
+                        <div class="modal" id="warning-modal">
+                            <div class="modal-background"></div>
+                            <div class="modal-content">
+                                <div class="card">
+                                    <div class="card-content" style="text-align: center;">
+                                        <p class="title is-4">
+                                            魔剤！？
+                                        </p>
+                                    </div>
+                                    <footer class="card-footer">
+                                        <a href="#" class="card-footer-item" v-on:click="delete_data(item.id)">大丈夫やで</a>
+                                        <a href="#" class="card-footer-item" onclick="modal_open('warning-modal')"
+                                            style="color: var(--black-bis)">あかんあかん</a>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
                         <div class="columns is-gapless is-multiline is-mobile budget">
                             <!-- <div class="columns"> -->
                             <div class="card column is-four-fifths in_card">
@@ -159,23 +177,8 @@
                                         </div>
                                     </div>
                                     <footer class="card-footer" slot="footer">
-                                        <!-- 確認画面 -->
-                                        <div class="modal" id="warning-modal">
-                                            <div class="modal-background"></div>
-                                            <div class="modal-content">
-                                                <div class="card">
-                                                    <div class="card-content" style="text-align: center;">
-                                                        <p class="title is-4">
-                                                            魔剤！？
-                                                        </p>
-                                                    </div>
-                                                    <footer class="card-footer">
-                                                        <a href="#" class="card-footer-item" v-on:click="delete_data(item.id)">大丈夫やで</a>
-                                                        <a href="#" class="card-footer-item" onclick="modal_open('warning-modal')" style="color: var(--black-bis)">あかんあかん</a>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
                                         <a href="#" class="card-footer-item button is-danger is-outlined"
                                             onclick="modal_open('warning-modal')">消す</a>
                                     </footer>
