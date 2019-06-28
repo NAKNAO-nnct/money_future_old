@@ -32,8 +32,8 @@ window.onchange = function () { reload(); }
 function reload() {
     // window.location.reload();
     // display_money();
-    // // setTimeout("get_card_order()", 5000);
-    get_card_order();
+    setTimeout("get_card_order()", 5000);
+    // get_card_order();
 
 
     vue_cons[0].update();
@@ -52,7 +52,8 @@ function get_card_order() {
     var cards = document.getElementsByClassName("plans");
     var tmp_user_data = new Array();
 
-    var user_data = JSON.parse(localStorage[database_key]);
+    // var user_data = JSON.parse(localStorage[database_key]);
+    get_data();
 
     for (let i = 0; i < cards.length; i++) {
         tmp_user_data[i] = new Object();
@@ -80,7 +81,6 @@ function display_money() {
     for (let i = 0; i < document.getElementsByClassName("budget").length; i++) {
         sum[i].innerHTML = balance + parseInt(money[i].innerHTML);
         balance += parseInt(money[i].innerHTML);
-        // sum[i].parentElement;
     }
 }
 
@@ -100,7 +100,7 @@ function check_button(button) {
 (function init_db() {
     // localstorageにデータがなければデータを挿入
     if (localStorage[database_key] != undefined) {
-        user_data = JSON.parse(localStorage[database_key]);
+        get_data();
     } else {
         localStorage[database_key] = JSON.stringify(user_data);
     }
@@ -135,7 +135,7 @@ function check_button(button) {
 
     Sortable.create(app, {
         handle: '.my-handle',
-        animation: 150
+        animation: 1000
     });
 
 }());
@@ -148,6 +148,7 @@ function insert_db() {
 // get
 function get_data() {
     // console.log(localStorage[database_key]);
+    user_data = JSON.parse(localStorage[database_key]);
 };
 
 // delete
@@ -160,9 +161,7 @@ function delete_data(id) {
         }
     }
     user_data["items"] = user_data["items"].filter(n => n !== 1);
-    console.log(user_data["items"]);
     insert_db();
-
 
     // setTimeout("vue_cons[0].update()", 800);
 }
@@ -171,6 +170,7 @@ function delete_data(id) {
 function forcibly_initializing() {
     localStorage.clear();
     vue_cons[0].update();
+    location.reload();
 }
 
 
