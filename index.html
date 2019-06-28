@@ -120,7 +120,24 @@
                 </div>
             </div>
         </div>
-
+        <!-- 確認画面 -->
+        <div class="modal" id="warning-modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="card">
+                    <div class="card-content" style="text-align: center;">
+                        <p class="title is-4">
+                            魔剤！？
+                        </p>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item">大丈夫やで</a>
+                        <a href="#" class="card-footer-item" onclick="modal_open('warning-modal')"
+                            style="color: var(--black-bis)">あかんあかん</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
 
 
         <!--  -->
@@ -136,25 +153,7 @@
                     <div>
 
                     </div>
-                    <div v-for="item, index in items" draggable="false" class="" style="">
-                        <!-- 確認画面 -->
-                        <div class="modal" id="warning-modal">
-                            <div class="modal-background"></div>
-                            <div class="modal-content">
-                                <div class="card">
-                                    <div class="card-content" style="text-align: center;">
-                                        <p class="title is-4">
-                                            魔剤！？
-                                        </p>
-                                    </div>
-                                    <footer class="card-footer">
-                                        <a href="#" class="card-footer-item" v-on:click="delete_data(item.id)">大丈夫やで</a>
-                                        <a href="#" class="card-footer-item" onclick="modal_open('warning-modal')"
-                                            style="color: var(--black-bis)">あかんあかん</a>
-                                    </footer>
-                                </div>
-                            </div>
-                        </div>
+                    <div v-for="item, index in items">
                         <div class="columns is-gapless is-multiline is-mobile budget">
                             <!-- <div class="columns"> -->
                             <div class="card column is-four-fifths in_card">
@@ -179,7 +178,7 @@
                                     <footer class="card-footer" slot="footer">
 
 
-                                        <a href="#" class="card-footer-item button is-danger is-outlined"
+                                        <a class="card-footer-item button is-danger is-outlined"
                                             onclick="modal_open('warning-modal')">消す</a>
                                     </footer>
                                 </div>

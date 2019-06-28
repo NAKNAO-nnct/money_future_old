@@ -32,11 +32,13 @@ window.onchange = function () { reload(); }
 function reload() {
     // window.location.reload();
     // display_money();
-    setTimeout("get_card_order()", 5000);
+    setTimeout("get_card_order()", 1000);
     // get_card_order();
 
 
-    vue_cons[0].update();
+    // vue_cons[0].update();
+
+    // setTimeout("vue_cons[0].update()", 2000);
 }
 
 // window.onmousemove = function () {
@@ -49,6 +51,8 @@ function reload() {
 
 // カード並び順を取得
 function get_card_order() {
+
+    // vue_cons[0].$destroy();
     var cards = document.getElementsByClassName("plans");
     var tmp_user_data = new Array();
 
@@ -69,6 +73,7 @@ function get_card_order() {
     console.log(user_data);
 
     insert_db();
+    display_money();
 }
 
 // 予算表示
@@ -111,6 +116,7 @@ function check_button(button) {
         data: user_data,
         methods: {
             update: function () {
+                // get_data();
                 this.$forceUpdate();
                 display_money();
             }
@@ -124,6 +130,7 @@ function check_button(button) {
             update: function () {
                 const balance = parseInt(document.getElementById("balance_money").value);
                 if (!isNaN(balance)) {
+                    get_data();
                     user_data["have"].balance = balance;
                     this.$forceUpdate();
                     display_money();
@@ -154,6 +161,7 @@ function get_data() {
 // delete
 function delete_data(id) {
     modal_open('warning-modal');
+    get_data();
     var n;
     for (let i = 0; i < user_data["items"].length; i++) {
         if (user_data["items"][i]["id"] == id) {
@@ -161,26 +169,28 @@ function delete_data(id) {
             n = i;
         }
     }
+    // document.getElementsByClassName("in_card")[n].children[1].children[0].children[0].checked = true;
+    // document.getElementsByClassName("in_card")[n].classList.toggle("card-disable");
     user_data["items"] = user_data["items"].filter(n => n !== 1);
     insert_db();
-
-    // setTimeout("vue_cons[0].update()", 800);
+    // window.location.reload();
+    // vue_cons[0].update();
 }
 
 // 強制初期化
 function forcibly_initializing() {
     localStorage.clear();
-    vue_cons[0].update();
-    location.reload();
+    // vue_cons[0].update();
+    // window.location.reload();
 }
 
 // modle画面のOn/off
-function modal_open(modal_name){
+function modal_open(modal_name) {
     document.getElementById(modal_name).classList.toggle("is-active");
 }
 
 // 予算の追加
-function add_plans(){}
+function add_plans() { }
 
 
 
