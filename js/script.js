@@ -6,19 +6,19 @@ var database_key = "money_future";
 var user_data = {
     items: [
         {
-            id: 1, name: '家を買う', money: '-100', date: '2019/06/19', type: 'out'
+            id: 1, name: '家を買う', money: '-100', date: '2019/06/19', type: 'out', memo: ''
         },
         {
-            id: 2, name: 'BD買う', money: '-2000', date: '2019/03/09', type: 'out'
+            id: 2, name: 'BD買う', money: '-2000', date: '2019/03/09', type: 'out', memo: ''
         },
         {
-            id: 3, name: '初田家買収', money: '-30', date: '2019/09/12', type: 'out'
+            id: 3, name: '初田家買収', money: '-30', date: '2019/09/12', type: 'out', memo: ''
         },
         {
-            id: 4, name: 'Apple売却', money: '30000', date: '2019/11/12', type: 'in'
+            id: 4, name: 'Apple売却', money: '30000', date: '2019/11/12', type: 'in', memo: ''
         },
         {
-            id: 5, name: 'MS購入', money: '-20000', date: '2019/12/04', type: 'out'
+            id: 5, name: 'MS購入', money: '-20000', date: '2019/12/04', type: 'out', memo: ''
         }
     ],
     have: {
@@ -171,6 +171,11 @@ function forcibly_initializing() {
     localStorage.clear();
     vue_cons[0].update();
     location.reload();
+}
+
+// modle画面のOn/off
+function modal_open(modal_name){
+    document.getElementById(modal_name).classList.toggle("is-active");
 }
 
 
