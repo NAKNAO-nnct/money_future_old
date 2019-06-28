@@ -16,6 +16,9 @@ var user_data = {
         },
         {
             id: 4, name: 'Apple売却', money: '30000', date: '2019/11/12', type: 'in'
+        },
+        {
+            id: 5, name: 'MS購入', money: '-20000', date: '2019/12/04', type: 'out'
         }
     ],
     have: {
@@ -23,10 +26,21 @@ var user_data = {
     }
 };
 
-window.onchange = function () {
-    display_money();
-    // setTimeout(get_card_order(), 5000);
+function _on(el, event, fn) {
+    el.addEventListener(event, fn, { capture: false, passive: false });
+}
+
+// 画面に変更が加わるごとに表示金額計算と並び順を保存
+window.onchange = function () { reload(); }
+
+function reload() {
+    // window.location.reload();
+    // display_money();
+    // // setTimeout("get_card_order()", 5000);
     get_card_order();
+
+
+    // vue_cons[0].update();
 }
 
 // window.onmousemove = function () {
@@ -40,16 +54,18 @@ window.onchange = function () {
 // カード並び順を取得
 function get_card_order() {
     var cards = document.getElementsByClassName("plans");
-    var _user_data = {};
-    Object.assign(_user_data, user_data);
-    console.log(user_data);
+    var tmp_user_data = new Array();
 
-    // for (let i = 0; i < cards.length; i++) {
-    //     user_data.items[i] = Object.create(_user_data.items[cards[i].value - 1]);
-    // }
     for (let i = 0; i < cards.length; i++) {
-        console.log(user_data.items[i].name);
+        tmp_user_data[i] = new Object();
+        user_data.items.forEach(function (item) {
+            if (cards[i].value == item.id) {
+                tmp_user_data[i] = Object.assign({}, item);
+            }
+        })
     }
+    user_data.items = new Array();
+    user_data.items = tmp_user_data;
 
     // insert_db();
 
@@ -71,8 +87,6 @@ function display_money() {
 
 // 反映
 function check_button(button) {
-    console.log(button.parentNode.parentNode.parentNode.parentNode.style[0] == "opacity");
-
     button.parentNode.parentNode.parentNode.classList.toggle("card-disable");
 }
 // var check_button = document.getElementsByClassName("check-botton");
@@ -134,7 +148,7 @@ function insert_db() {
 
 // get
 function get_data() {
-    console.log(localStorage[database_key]);
+    // console.log(localStorage[database_key]);
 };
 
 // delete
@@ -146,10 +160,12 @@ function delete_data(id) {
             n = i;
         }
     }
-
     user_data["items"] = user_data["items"].filter(n => n !== 1);
     console.log(user_data["items"]);
-    vue_cons[0].update();
+    insert_db();
+
+
+    // setTimeout("vue_cons[0].update()", 800);
 }
 
 // 強制初期化

@@ -43,7 +43,7 @@
                                     <a class="button is-info" v-on:click="update()">確定</a>
                                 </div>
                                 <div class="control" style="right: -30px;">
-                                    <button class="button" onclick="display_money()">更新</button>
+                                    <button class="button" onclick="reload()">更新</button>
                                 </div>
                                 <div class="control" style="right: -30px;">
                                     <button class="button" onclick="forcibly_initializing()">初期化</button>
@@ -70,7 +70,7 @@
 
                     </div>
                     <!-- <draggable> -->
-                    <div v-for="item, index in items">
+                    <div v-for="item, index in items" draggable="false" class="" style="">
                         <div class="columns is-gapless is-multiline is-mobile budget">
                             <!-- <div class="columns"> -->
                             <div class="card column is-four-fifths in_card">
