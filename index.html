@@ -120,6 +120,7 @@
                 </div>
             </div>
         </div>
+
         <!-- 確認画面 -->
         <div class="modal" id="warning-modal">
             <div class="modal-background"></div>
@@ -179,7 +180,7 @@
 
 
                                         <a class="card-footer-item button is-danger is-outlined"
-                                            onclick="modal_open('warning-modal')">消す</a>
+                                            v-on:click="modal_open('warning-modal',item.id)">消す</a>
                                     </footer>
                                 </div>
                             </div>

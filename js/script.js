@@ -161,7 +161,6 @@ function get_data() {
 // delete
 function delete_data(id) {
     modal_open('warning-modal');
-    get_data();
     var n;
     for (let i = 0; i < user_data["items"].length; i++) {
         if (user_data["items"][i]["id"] == id) {
@@ -181,12 +180,16 @@ function delete_data(id) {
 function forcibly_initializing() {
     localStorage.clear();
     // vue_cons[0].update();
-    // window.location.reload();
+    window.location.reload();
 }
 
 // modle画面のOn/off
-function modal_open(modal_name) {
+function modal_open(modal_name, id) {
     document.getElementById(modal_name).classList.toggle("is-active");
+    if (id != null) {
+        document.getElementById(modal_name).children[1].children[0].children[1].children[0].onclick = function () { delete_data(id) };
+        console.log(id);
+    }
 }
 
 // 予算の追加
