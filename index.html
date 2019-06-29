@@ -42,12 +42,15 @@
                                 <div class="control">
                                     <a class="button is-info" v-on:click="update()">確定</a>
                                 </div>
-                                <div class="control" style="right: -30px;">
-                                    <button class="button" onclick="display_money()">更新</button>
-                                </div>
-                                <div class="control" style="right: -30px;">
-                                    <button class="button is-danger" onclick="forcibly_initializing()">初期化</button>
-                                </div>
+
+                            </div>
+                        </div>
+                        <div class="field has-addons">
+                            <div class="control">
+                                <button class="button" onclick="display_money()">更新</button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-danger" onclick="forcibly_initializing()">初期化</button>
                             </div>
                         </div>
                     </div>
@@ -57,7 +60,7 @@
 
         <hr>
         <div class="modal" id="add-modal">
-            <div class="modal-background"></div>
+            <div class="modal-background" onclick="modal_open('add-modal')"></div>
             <div class="modal-content">
                 <div class="card">
                     <div class="card-content">
@@ -205,7 +208,7 @@
     </main>
 
     <div class="add-area">
-        <a class="add-button button is-primary is-rounded subtitle is-3" style="top: -80%; margin-right: 10%;"
+        <a class="add-button button is-primary is-rounded subtitle is-5" style="top: -80%; margin-right: 10%;"
             onclick="modal_open('add-modal')">あっど</a>
     </div>
 
