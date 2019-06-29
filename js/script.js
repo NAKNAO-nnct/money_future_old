@@ -122,7 +122,7 @@ function check_button(btn) {
 
     Sortable.create(app, {
         handle: '.my-handle',
-        animation: 10000
+        animation: 400
     });
 
     // var accordions = bulmaExtensions.bulmaAccordion.attach();
