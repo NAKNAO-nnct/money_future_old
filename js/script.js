@@ -30,25 +30,12 @@ var user_data = {
 window.onchange = function () { reload(); }
 
 function reload() {
-    // window.location.reload();
-    // display_money();
 
     setTimeout("get_card_order()", 1000);
-    // get_card_order();
-
-
-    // vue_cons[0].update();
 
     // setTimeout("vue_cons[0].update()", 2000);
+    setTimeout("vue_cons[0].$forceUpdate()", 1000);
 }
-
-// window.onmousemove = function () {
-//     console.warn("==========================");
-//     for (let i = 0; i < 4; i++) {
-//         // user_data.items[i] = _user_data.items[cards[i].value];
-//         console.log(user_data.items[i].name);
-//     }
-// }
 
 // カード並び順を取得
 function get_card_order() {
@@ -69,9 +56,7 @@ function get_card_order() {
         })
     }
     user_data.items = new Array();
-    console.log(tmp_user_data);
     user_data.items = tmp_user_data.slice();
-    console.log(user_data);
 
     insert_db();
     display_money();
@@ -89,6 +74,8 @@ function display_money() {
         sum[i].innerHTML = balance + parseInt(money[i].innerHTML);
         balance += parseInt(money[i].innerHTML);
     }
+
+    setTimeout("vue_cons[0].$forceUpdate()", 1000);
 }
 
 // 詳細表示
@@ -100,12 +87,6 @@ function details(btn) {
 function check_button(btn) {
     btn.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.classList.toggle("card-disable");
 }
-// var check_button = document.getElementsByClassName("check-botton");
-// for (let i = 0; i < check_button.length; i++) {
-//     check_button[i].onclick = function () {
-//         this.classList.toggle("is-outlined");
-//     }
-// }
 
 // Web storage
 // init
@@ -116,18 +97,11 @@ function check_button(btn) {
     } else {
         localStorage[database_key] = JSON.stringify(user_data);
     }
-    console.log(user_data);
+
     // vue
     vue_cons[0] = new Vue({
         el: "#app",
-        data: user_data,
-        methods: {
-            update: function () {
-                // get_data();
-                vue_cons[0].$forceUpdate();
-                display_money();
-            }
-        }
+        data: user_data
     });
 
     vue_cons[1] = new Vue({
@@ -137,9 +111,8 @@ function check_button(btn) {
             update: function () {
                 const balance = parseInt(document.getElementById("balance_money").value);
                 if (!isNaN(balance)) {
-                    get_data();
                     user_data["have"].balance = balance;
-                    this.$forceUpdate();
+                    vue_cons[1].$forceUpdate();
                     display_money();
                 }
             }
@@ -149,21 +122,21 @@ function check_button(btn) {
 
     Sortable.create(app, {
         handle: '.my-handle',
-        animation: 600
+        animation: 10000
     });
 
-    var accordions = bulmaExtensions.bulmaAccordion.attach();
+    // var accordions = bulmaExtensions.bulmaAccordion.attach();
 
 }());
 
 // insert
 function insert_db() {
     localStorage[database_key] = JSON.stringify(user_data);
+    console.log("222222");
 }
 
 // get
 function get_data() {
-    // console.log(localStorage[database_key]);
     user_data = JSON.parse(localStorage[database_key]);
 };
 
@@ -177,18 +150,15 @@ function delete_data(id) {
             n = i;
         }
     }
-    // document.getElementsByClassName("in_card")[n].children[1].children[0].children[0].checked = true;
-    // document.getElementsByClassName("in_card")[n].classList.toggle("card-disable");
+
     user_data["items"] = user_data["items"].filter(n => n !== 1);
     insert_db();
-    window.location.reload();
-    // vue_cons[0].update();
+    setTimeout("vue_cons[0].$forceUpdate()", 1000);
 }
 
 // 強制初期化
 function forcibly_initializing() {
     localStorage.clear();
-    // vue_cons[0].update();
     window.location.reload();
 }
 
@@ -197,14 +167,18 @@ function modal_open(modal_name, id) {
     document.getElementById(modal_name).classList.toggle("is-active");
     if (id != null) {
         document.getElementById(modal_name).children[1].children[0].children[1].children[0].onclick = function () { delete_data(id) };
-        console.log(id);
     }
 }
 
 // 予算の追加
 function add_plans() { }
 
-
+function a() {
+    // get_data();
+    // user_data.items[1].name = "ぼけてよ";
+    // insert_db();
+    // setTimeout("vue_cons[0].$forceUpdate()", 1000);
+}
 
 // var btn = document.getElementsByClassName("button");
 // for (let i = 0; i < btn.length; i++) {

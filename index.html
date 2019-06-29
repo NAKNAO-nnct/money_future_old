@@ -39,7 +39,7 @@
                             <label class="label is-medium">残りのお金</label>
                             <div class="field has-addons">
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="君の預金" id="balance_money">
+                                    <input class="input" type="number" placeholder="君の預金" id="balance_money">
                                 </div>
                                 <div class="control">
                                     <a class="button is-info" v-on:click="update()">確定</a>
@@ -155,11 +155,11 @@
                 <div id="app">
                     <div v-for="item, index in items">
                         <div class="columns is-gapless is-multiline is-mobile budget">
-                            <div class="card column is-11 in_card">
+                            <div class="card column is-9 in_card">
                                 <input type="text" class="id-card plans" disabled v-bind:value="item.id">
                                 <header class="card-header">
                                     <div class="container container-box">
-                                        <label class="" style="width: 50px">
+                                        <label class="" style="width: 25px">
                                             <div class="item filed card-header-title ">
                                                 <input v-bind:id="item.id" type="checkbox" name=""
                                                     class="switch is-info is-small" checked="checked"
@@ -173,8 +173,8 @@
                                             </div>
 
                                             <div class="item subtitle" style="right: 0;">
-                                                <div style="margin-top: 2%; flex-grow: 3;">
-                                                    <span class="money">{{ item.money }}</span>円&emsp;
+                                                <div style="margin-top: 10%; flex-grow: 3;">
+                                                    <span class="money">{{ item.money }}</span><small>円</small>
                                                 </div>
                                             </div>
                                         </div>
