@@ -154,6 +154,8 @@ function delete_data(id) {
     user_data["items"] = user_data["items"].filter(n => n !== 1);
     insert_db();
     setTimeout("vue_cons[0].$forceUpdate()", 1000);
+
+    document.getElementById(id);
 }
 
 // 強制初期化
