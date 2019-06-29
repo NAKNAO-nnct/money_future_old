@@ -32,6 +32,7 @@ window.onchange = function () { reload(); }
 function reload() {
     // window.location.reload();
     // display_money();
+
     setTimeout("get_card_order()", 1000);
     // get_card_order();
 
@@ -74,6 +75,7 @@ function get_card_order() {
 
     insert_db();
     display_money();
+    setTimeout("vue_cons[0].$forceUpdate()", 1000);
 }
 
 // 予算表示
@@ -122,7 +124,7 @@ function check_button(btn) {
         methods: {
             update: function () {
                 // get_data();
-                this.$forceUpdate();
+                vue_cons[0].$forceUpdate();
                 display_money();
             }
         }
@@ -179,7 +181,7 @@ function delete_data(id) {
     // document.getElementsByClassName("in_card")[n].classList.toggle("card-disable");
     user_data["items"] = user_data["items"].filter(n => n !== 1);
     insert_db();
-    // window.location.reload();
+    window.location.reload();
     // vue_cons[0].update();
 }
 
