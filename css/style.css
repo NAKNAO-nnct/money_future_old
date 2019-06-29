@@ -8,10 +8,11 @@
 
 .add-area{
     position: fixed; 
-    bottom: 0; 
-    height: 80px; 
+    bottom: 18%; 
+    height: 1px; 
     width: 100%; 
     text-align: right; 
+    /* display: none; */
     /* background-color: beige; */
 }
 
