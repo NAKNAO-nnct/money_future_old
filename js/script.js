@@ -53,7 +53,7 @@ function reload() {
 function get_card_order() {
 
     // vue_cons[0].$destroy();
-    var cards = document.getElementsByClassName("plans");
+    var cards = document.getElementsByClassName("id-card plans");
     var tmp_user_data = new Array();
 
     // var user_data = JSON.parse(localStorage[database_key]);
@@ -89,9 +89,14 @@ function display_money() {
     }
 }
 
+// 詳細表示
+function details(btn) {
+    btn.parentNode.parentNode.children[2].classList.toggle("plans");
+}
+
 // 反映
-function check_button(button) {
-    button.parentNode.parentNode.parentNode.classList.toggle("card-disable");
+function check_button(btn) {
+    btn.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.classList.toggle("card-disable");
 }
 // var check_button = document.getElementsByClassName("check-botton");
 // for (let i = 0; i < check_button.length; i++) {
@@ -144,6 +149,8 @@ function check_button(button) {
         handle: '.my-handle',
         animation: 600
     });
+
+    var accordions = bulmaExtensions.bulmaAccordion.attach();
 
 }());
 

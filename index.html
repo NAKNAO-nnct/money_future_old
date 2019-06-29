@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/bulma.min.css">
+    <link rel="stylesheet" href="./css/bulma-extensions.min.css">
 
     <link rel="stylesheet" href="./css/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
+    <script src="./js/bulma-extensions.min.js"></script>
     <!-- Latest Sortable -->
     <!-- <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
@@ -143,7 +145,6 @@
             </div>
         </div>
 
-
         <!--  -->
         <div class="columns is-gapless is-multiline is-mobile">
             <!-- 
@@ -151,43 +152,51 @@
                 <div class="card column is-four-fifths in_card"></div>
             </div> -->
             <div class="column">
-
                 <div id="app">
-
-                    <div>
-
-                    </div>
                     <div v-for="item, index in items">
                         <div class="columns is-gapless is-multiline is-mobile budget">
-                            <!-- <div class="columns"> -->
-                            <div class="card column is-three-quarters in_card">
-                                <input type="text" class="plans" disabled v-bind:value="item.id">
+                            <div class="card column is-11 in_card">
+                                <input type="text" class="id-card plans" disabled v-bind:value="item.id">
                                 <header class="card-header">
-                                    <label class="card-header-title checkbox">
-                                        <input type="checkbox" name="" id="" class="check-botton"
-                                            onclick="check_button(this)" checked="checked">
-                                        &emsp;{{ item.name }}
-                                    </label>
-                                    <p id="sum"></p>
-                                </header>
-                                <div>
-                                    <div class="card-content my-handle">
-                                        <div class="content">
-                                            <p>
-                                                <span class="subtitle is-4 money">{{ item.money }}</span>円
-                                            </p>
-                                            日付：<time datetime="">{{ item.date }}</time>
+                                    <div class="container container-box">
+                                        <label class="" style="width: 50px">
+                                            <div class="item filed card-header-title ">
+                                                <input v-bind:id="item.id" type="checkbox" name=""
+                                                    class="switch is-info is-small" checked="checked"
+                                                    onclick="check_button(this)">
+                                                <label v-bind:for="item.id"></label>
+                                            </div>
+                                        </label>
+                                        <div class="my-handle container-box" style="width: 100%;">
+                                            <div class="item  card-header-title">
+                                                <label v-bind:for="item.id">&emsp;{{ item.name }}</label>
+                                            </div>
+
+                                            <div class="item subtitle" style="right: 0;">
+                                                <div style="margin-top: 2%; flex-grow: 3;">
+                                                    <span class="money">{{ item.money }}</span>円&emsp;
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <footer class="card-footer" slot="footer">
+                                </header>
+                                <div class="card-content plans">
+                                    <div class="content">
+                                        <p>
+                                            <span class="subtitle is-4 money">{{ item.money }}</span>円
+                                        </p>
+                                        日付: &emsp;<time datetime="">{{ item.date }}</time><br>
+                                        <div id="memo">備考: &emsp;{{ item.memo }}</div>
+                                    </div>
 
-
-                                        <a class="card-footer-item button is-danger is-outlined"
-                                            v-on:click="modal_open('warning-modal',item.id)">消す</a>
-                                    </footer>
                                 </div>
+                                <footer class="card-footer" slot="footer">
+                                    <a class="card-footer-item button is-danger is-outlined"
+                                        v-on:click="modal_open('warning-modal',item.id)">消す</a>
+                                    <a class="card-footer-item button is-text is-outlined"
+                                        onclick="details(this)">詳細</a>
+                                </footer>
                             </div>
-
                             <div class="card column">
                                 <div style="position:absolute; right: 5px;bottom: 0px;">
                                     <div class="">

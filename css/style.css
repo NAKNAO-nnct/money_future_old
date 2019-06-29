@@ -1,6 +1,12 @@
 body{
     overflow-x: hidden;
 }
+
+.container-box {
+    display: flex;
+}
+.item{border: solid white 1px; min-width: 100px; min-height: 45px; text-align: left;}
+
 .card-disable {
     opacity: 0.3;
 }
