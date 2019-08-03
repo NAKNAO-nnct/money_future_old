@@ -31,10 +31,10 @@ window.onchange = function () { reload(); }
 
 function reload() {
 
-    setTimeout("get_card_order()", 1000);
+    setTimeout("get_card_order()", 2000);
 
     // setTimeout("vue_cons[0].update()", 2000);
-    setTimeout("vue_cons[0].$forceUpdate()", 1000);
+    vue_cons[0].$forceUpdate();
 }
 
 // カード並び順を取得
@@ -60,7 +60,6 @@ function get_card_order() {
 
     insert_db();
     display_money();
-    setTimeout("vue_cons[0].$forceUpdate()", 1000);
 }
 
 // 予算表示
@@ -70,9 +69,11 @@ function display_money() {
     // var in_money = document.getElementsByClassName("in_money");
     var money = document.getElementsByClassName("money");
     var sum = document.getElementsByClassName("sum");
+    j = 0;
     for (let i = 0; i < document.getElementsByClassName("budget").length; i++) {
-        sum[i].innerHTML = balance + parseInt(money[i].innerHTML);
-        balance += parseInt(money[i].innerHTML);
+        sum[i].innerHTML = balance + parseInt(money[j].innerHTML);
+        balance += parseInt(money[j].innerHTML);
+        j += 2;
     }
 
     setTimeout("vue_cons[0].$forceUpdate()", 1000);
@@ -101,7 +102,15 @@ function check_button(btn) {
     // vue
     vue_cons[0] = new Vue({
         el: "#app",
-        data: user_data
+        data: user_data,
+        methods: {
+            update_list: function () {
+                get_data();
+                this.$nextTick(() => {
+                    this.$forceUpdate();
+                })
+            }
+        }
     });
 
     vue_cons[1] = new Vue({
@@ -132,7 +141,6 @@ function check_button(btn) {
 // insert
 function insert_db() {
     localStorage[database_key] = JSON.stringify(user_data);
-    console.log("222222");
 }
 
 // get
@@ -153,9 +161,8 @@ function delete_data(id) {
 
     user_data["items"] = user_data["items"].filter(n => n !== 1);
     insert_db();
-    setTimeout("vue_cons[0].$forceUpdate()", 1000);
 
-    document.getElementById(id);
+    vue_cons[0].$forceUpdate();
 }
 
 // 強制初期化
@@ -180,6 +187,7 @@ function a() {
     // user_data.items[1].name = "ぼけてよ";
     // insert_db();
     // setTimeout("vue_cons[0].$forceUpdate()", 1000);
+    vue_cons[0].$destroy();
 }
 
 // var btn = document.getElementsByClassName("button");
@@ -188,3 +196,44 @@ function a() {
 //         alert("fff");
 //     }
 // }
+
+Vue.component('todo-item', {
+    template: '\
+    <li>\
+      {{ title }}\
+      <button v-on:click="$emit(\'remove\')">Remove</button>\
+    </li>\
+  ',
+    props: ['title']
+})
+
+new Vue({
+    el: '#todo-list-example',
+    data: {
+        newTodoText: '',
+        todos: [
+            {
+                id: 1,
+                title: 'Do the dishes',
+            },
+            {
+                id: 2,
+                title: 'Take out the trash',
+            },
+            {
+                id: 3,
+                title: 'Mow the lawn'
+            }
+        ],
+        nextTodoId: 4
+    },
+    methods: {
+        addNewTodo: function () {
+            this.todos.push({
+                id: this.nextTodoId++,
+                title: this.newTodoText
+            })
+            this.newTodoText = ''
+        }
+    }
+})
