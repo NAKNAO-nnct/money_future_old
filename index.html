@@ -215,7 +215,7 @@
         </div>
 
     </main>
-    <div id="todo-list-example">
+    <div id="todo-list-example" class="container">
         <form v-on:submit.prevent="addNewTodo" class="modal" id="add-modal">
             <div class="modal-background" onclick="modal_open('add-modal')"></div>
             <div class="modal-content">
@@ -233,7 +233,8 @@
                             <div class="field">
                                 <label class="label">Title</label>
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="自分生誕祭 ケーキ代" required>
+                                    <input v-model="newTodoText" class="input" type="text" placeholder="自分生誕祭 ケーキ代"
+                                        required>
                                 </div>
                             </div>
                             <div class="field">
@@ -246,8 +247,8 @@
                                         </a>
                                     </p>
                                     <p class="control" style="width: 100%;">
-                                        <input class="input" type="number" min="0" placeholder="3500"
-                                            id="input_plan_balance" required>
+                                        <input v-model="addNewMoney" class="input" type="number" min="0"
+                                            placeholder="3500" id="input_plan_balance" required>
                                     </p>
                                     <div class="select is-danger" id="input_plan_balance_out">
                                         <select required style="color: red;">
@@ -274,19 +275,89 @@
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a href="#" class="card-footer-item">追加</a>
+                        <button href="#" class="card-footer-item" type="submit"
+                            onclick="modal_open('add-modal')">追加</button>
                         <a href="#" class="card-footer-item" onclick="modal_open('add-modal')">やっぱやめる</a>
                     </footer>
                 </footer>
-                <label for="new-todo">Add a todo</label>
-                <input v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat">
-                <button>Add</button>
             </div>
 
         </form>
+
+        <!--  -->
+        <div class="columns is-gapless is-multiline is-mobile">
+            <!-- 
+            <div class="column">
+                <div class="card column is-four-fifths in_card"></div>
+            </div> -->
+            <div class="column">
+                <div id="apps">
+                    <div v-for="(item, index) in todos">
+                        <div class="columns is-gapless is-multiline is-mobile budget">
+                            <div class="card column is-9 in_card">
+                                <input type="text" class="id-card plans" disabled v-bind:value="item.id">
+                                <header class="card-header">
+                                    <div class="container container-box">
+                                        <label class="" style="width: 25px">
+                                            <div class="item filed card-header-title ">
+                                                <input v-bind:id="item.id" type="checkbox" name=""
+                                                    class="switch is-info is-small" v-model="item.isChecked"
+                                                    onclick="check_button(this)">
+                                                <label v-bind:for="item.id"></label>
+                                            </div>
+                                        </label>
+                                        <div class="my-handle container-box" style="width: 100%;">
+                                            <div class="item  card-header-title">
+                                                <label v-bind:for="item.id">&emsp;{{ item.title }}</label>
+                                            </div>
+
+                                            <div class="item subtitle" style="right: 0; text-align:right;">
+                                                <div style="margin-top: 10%; flex-grow: 3;">
+                                                    <span class="money">{{ item.money }}</span><small>円&nbsp;</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </header>
+                                <div class="card-content plans">
+                                    <div class="content">
+                                        <p>
+                                            <span class="subtitle is-4 money">{{ item.money }}</span>円
+                                        </p>
+                                        日付: &emsp;<time datetime="">{{ item.date }}</time><br>
+                                        <div id="memo">備考: &emsp;{{ item.memo }}</div>
+                                    </div>
+
+                                </div>
+                                <footer class="card-footer" slot="footer">
+                                    <a class="card-footer-item button is-danger is-outlined"
+                                        v-on:click="modal_open('warning-modal',item.id)">消す</a>
+                                    <a class="card-footer-item button is-text is-outlined"
+                                        onclick="details(this)">詳細</a>
+                                </footer>
+                            </div>
+                            <div class="card column">
+                                <div style="position:absolute; right: 5px;bottom: 0px;">
+                                    <div class="">
+                                        <p>
+                                            <span class="subtitle is-4 sum"></span>円
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <ul>
-            <li is="todo-item" v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.title"
-                v-on:remove="todos.splice(index, 1)"></li>
+            <li v-for="(todo, index) in todos">
+                <p class="my-handle">{{ todo.title }}</p>
+                <button is="todo-item" v-on:remove="todos.splice(index, 1)"></button>
+            </li>
         </ul>
     </div>
 

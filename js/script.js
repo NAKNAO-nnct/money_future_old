@@ -128,8 +128,54 @@ function check_button(btn) {
         }
     })
     display_money();
+    Vue.component('todo-item', {
+        template: '\
+    <li>\
+      {{ title }}\
+      <button v-on:click="$emit(\'remove\')">Remove</button>\
+    </li>\
+  ',
+        props: ['title']
+    })
 
-    Sortable.create(app, {
+    new Vue({
+        el: '#todo-list-example',
+        data: {
+            newTodoText: '',
+            addNewMoney: '',
+            todos: [
+                {
+                    id: 1, title: '家を買う', money: '-100', date: '2019/06/19', type: 'out', memo: '', isChecked: true
+                },
+                {
+                    id: 2, title: 'BD買う', money: '-2000', date: '2019/03/09', type: 'out', memo: '', isChecked: true
+                },
+                {
+                    id: 3, title: '初田家買収', money: '-30', date: '2019/09/12', type: 'out', memo: '', isChecked: true
+                },
+                {
+                    id: 4, title: 'Apple売却', money: '30000', date: '2019/11/12', type: 'in', memo: '', isChecked: true
+                },
+                {
+                    id: 5, title: 'MS購入', money: '-20000', date: '2019/12/04', type: 'out', memo: '', isChecked: true
+                }
+            ],
+            nextTodoId: 4
+        },
+        methods: {
+            addNewTodo: function () {
+                this.todos.push({
+                    id: this.nextTodoId++,
+                    title: this.newTodoText,
+                    money: this.todos
+                })
+                this.newTodoText = '';
+                console.log(this.todos);
+            }
+        }
+    })
+    // let body = document.getElementById('todo-list-example');
+    Sortable.create(apps, {
         handle: '.my-handle',
         animation: 400
     });
@@ -197,44 +243,3 @@ function a() {
 //     }
 // }
 
-Vue.component('todo-item', {
-    template: '\
-    <li>\
-      {{ title }}\
-      <button v-on:click="$emit(\'remove\')">Remove</button>\
-    </li>\
-  ',
-    props: ['title']
-})
-
-new Vue({
-    el: '#todo-list-example',
-    data: {
-        newTodoText: '',
-        todos: [
-            {
-                id: 1,
-                title: 'Do the dishes',
-            },
-            {
-                id: 2,
-                title: 'Take out the trash',
-            },
-            {
-                id: 3,
-                title: 'Mow the lawn'
-            }
-        ],
-        nextTodoId: 4
-    },
-    methods: {
-        addNewTodo: function () {
-            this.todos.push({
-                id: this.nextTodoId++,
-                title: this.newTitle
-            })
-            this.newTitle = '';
-            console.log(this.todos);
-        }
-    }
-})
